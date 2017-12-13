@@ -1,0 +1,16 @@
+syntax = "proto3";
+package Apollo;
+service ApolloService {
+  rpc Call (Request) returns (Response) {}
+}
+
+message Request {
+  string serviceName=1;
+  string data=2;
+}
+
+message Response {
+  string code=1;
+  string message = 2;
+  string data=3;
+}
