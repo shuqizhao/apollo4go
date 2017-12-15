@@ -1,16 +1,19 @@
 package main
 
-import "fmt"
 import (
 	Apollo "apollo4go/apollo"
 	"time"
+	"os"
+	"fmt"
 )
 
 func main(){
-	fmt.Println("123")
+	os.Setenv("CONSUL_HTTP_ADDR", "127.0.0.1:8500")
 	//Apollo.Run()
 	for {
-		Apollo.Call("Apollo.DemoInterface.IValues$Apollo.DemoInterface.IValues_Hello")
+		var result string
+		Apollo.Call("MyApollo_helloDaiIput",&result,"舒启钊")
+		fmt.Println(result)
 		time.Sleep(time.Second*5)
 	}
 }

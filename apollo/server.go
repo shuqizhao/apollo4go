@@ -12,9 +12,12 @@ const (
 	port = ":50051"
 )
 
-type server struct {}
+type Server struct {
+	Port int
+	IP string
+}
 
-func (s *server) Call(ctx context.Context, in *Request) (*Response, error) {
+func (s *Server) Call(ctx context.Context, in *Request) (*Response, error) {
 	return &Response{Message: "Hello " + in.ServiceName}, nil
 }
 
@@ -25,7 +28,7 @@ func Run()  {
 			log.Fatal("failed to listen: %v", err)
 		}
 		s := grpc.NewServer()
-		RegisterApolloServiceServer(s, &server{})
+		RegisterApolloServiceServer(s, &Server{})
 		s.Serve(lis)
 	}()
 
