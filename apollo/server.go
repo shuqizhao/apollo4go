@@ -31,7 +31,7 @@ var Services []interface{}
 var MethodValues = make(map[string] reflect.Value)
 var MethodTypes = make(map[string] reflect.Method)
 
-func Regist(service interface{}) error {
+func Register(service interface{}) error {
 	Services=append(Services,service)
 	//object:=reflect.ValueOf(service)
 
