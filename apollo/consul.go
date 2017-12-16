@@ -20,7 +20,7 @@ func GetServer(name string)  (*Server,error) {
 	}
 	count := len(newServices)
 	if count == 0 {
-		return nil, errors.New("an't found sercie " + name)
+		return nil, errors.New("can't found service " + name)
 	} else {
 		index := rand.Intn(count)
 		v := newServices[index]

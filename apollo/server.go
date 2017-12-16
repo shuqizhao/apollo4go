@@ -229,7 +229,8 @@ func GetPort(name string)  string{
 }
 
 func RandInt(min,max int) int{
-	port:=rand.Intn(max)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	port:=r.Intn(max)
 	if port<min{
 		RandInt(min,max)
 	}
