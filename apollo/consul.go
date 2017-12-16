@@ -11,11 +11,11 @@ func GetServer(name string)  (*Server,error) {
 	if err != nil {
 		return nil, err
 	}
-	services, err := client.Agent().Services()
+	services,_, err := client.Health().Service(name,"",true,nil)
 	var newServices []*consulapi.AgentService
 	for _, v := range services {
-		if v.Service == name {
-			newServices = append(newServices, v)
+		if v.Service.Service == name {
+			newServices = append(newServices, v.Service)
 		}
 	}
 	count := len(newServices)
