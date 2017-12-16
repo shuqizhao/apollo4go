@@ -29,15 +29,16 @@ func init()  {
 var Services []interface{}
 
 var MethodValues = make(map[string] reflect.Value)
-var MethodTypes = make(map[string] reflect.Method)
+//var Methods = make(map[string] reflect.Method)
+//var MethodTypes = make(map[string] reflect.Type)
 
 func Register(service interface{}) error {
 	Services=append(Services,service)
 	//object:=reflect.ValueOf(service)
 
 //	objRef:=object.Elem()
-	objType:=reflect.TypeOf(service).Elem()
-	objValue:=reflect.ValueOf(service).Elem()
+	objType:=reflect.TypeOf(service)
+	objValue:=reflect.ValueOf(service)
 	serviceName:=""
 	port:=""
 	fieldCount:=objType.NumField()
@@ -58,12 +59,19 @@ func Register(service interface{}) error {
 	for i:=0;i<methodCount ;i++  {
 		methodType:=objType.Method(i)
 		methodValue:=objValue.Method(i)
-		MethodTypes[serviceName+"_"+methodType.Name]=methodType
+		//Methods[serviceName+"_"+methodType.Name]=methodType
 		MethodValues[serviceName+"_"+methodType.Name]=methodValue
 		fmt.Println(methodType.Name,methodType.Type)
 	}
 	BuildService(serviceName,port)
 	return nil
+}
+
+func Router(name string,method interface{})  {
+	//methodType:=reflect.TypeOf(method)
+	methodValue:=reflect.ValueOf(method)
+	//MethodTypes[name]=methodType
+	MethodValues[name]=methodValue
 }
 
 type Server struct {
