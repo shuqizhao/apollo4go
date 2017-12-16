@@ -103,10 +103,9 @@ func (s *Server) Call(ctx context.Context, in *Request) (*Response, error) {
 			params[i] = reflect.ValueOf(values[i])
 		}
 		result := methodValue.Call(params)
-		p1 := result[0].String()
 		data := ""
 		if len(result) > 0 {
-			bytes, _ := json.Marshal(p1)
+			bytes, _ := json.Marshal(result[0].Interface())
 			data = string(bytes)
 		}
 		return &Response{Data: data, Code: "200"}, nil
